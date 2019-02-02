@@ -1,5 +1,24 @@
 from memory_profiler import profile
+from pympler import asizeof as size
 
+class Person:
+    def __init__(self, firstname, lastname):
+        self.firstname = firstname
+        self.lastname = lastname
+
+class PersonWithSlots:
+    __slots__ = ['firstname', 'lastname']
+    def __init__(self, firstname, lastname):
+        self.firstname = firstname
+        self.lastname = lastname
+
+person = Person('firstname', 'lastname')
+person_with_slots = PersonWithSlots('firstname', 'lastname')
+
+print('person:')
+print(size.asizeof(person))
+print('person with slots:')
+print(size.asizeof(person_with_slots))
 
 # Profile не работает с генератором "yeld"
 
